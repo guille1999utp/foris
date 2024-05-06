@@ -5,10 +5,11 @@ function commandos(comando, estudiantes, partes) {
     if (comando === 'Student') {
 
         const estudiante = partes[1]; // Capturamos nombre estudiante
-                estudiantes[estudiante] = {
-                    totalMinutos: 0,// Almacena el total de minutos que el estudiante asistió a clase
-                    diasAsistidos: new Set() // Almacena los días de la semana en los que el estudiante asistió a clase, en este caso inicializamos un Set para evitar duplicados y tener un mejor control de los días
-                };
+        
+        estudiantes[estudiante] = {
+            totalMinutos: 0,// Almacena el total de minutos que el estudiante asistió a clase
+            diasAsistidos: new Set() // Almacena los días de la semana en los que el estudiante asistió a clase, en este caso inicializamos un Set para evitar duplicados y tener un mejor control de los días
+        };
 
     } else if (comando === 'Presence') {
         const estudiante = partes[1];

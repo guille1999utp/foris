@@ -1,5 +1,7 @@
 const fs = require('fs');
 const commandos = require('./util/commands');
+const generarReporte = require('./util/report');
+
 // Función para procesar el archivo de entrada
 function inputComands(input) {
     fs.readFile(input, 'utf8', (err, data) => {
@@ -16,9 +18,8 @@ function inputComands(input) {
 
         // creamos un ciclo para verificar cada comando en el archivo
         lineas.forEach((linea) => {
-            const partes = linea.trim().split(' '); // Dividimos la línea en partes para tomar los datos correspondientes
 
-            
+            const partes = linea.trim().split(' '); // Dividimos la línea en partes para tomar los datos correspondientes
             const comando = partes[0]; // comando para agregar estudiante o presencia de este ("Student" o "Presence")
 
             commandos(comando, estudiantes, partes);
@@ -26,15 +27,7 @@ function inputComands(input) {
         });
 
         // Generamos el reporte de los estudiantes
-        const reporte = [];
-        for (const estudiante in estudiantes) {
-            const { totalMinutos, diasAsistidos } = estudiantes[estudiante];
-            const totalDias = diasAsistidos.size;
-            reporte.push({ estudiante, totalMinutos, totalDias });
-        }
-
-        // Ordenamos el reporte por minutos de mayor a menor
-        reporte.sort((a, b) => b.totalMinutos - a.totalMinutos);
+        const reporte = generarReporte(estudiantes);
 
         // Imprimimos el reporte de los estudiantes en la consola
         reporte.forEach(({ estudiante, totalMinutos, totalDias }) => {
